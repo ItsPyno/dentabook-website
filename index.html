@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DentaBook AI — Online Booking for Irish Dental Practices</title>
+<meta name="description" content="AI-powered online booking for dental practices across Ireland. Let patients book 24/7. Live availability, no double bookings, dentist dashboard included."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #0ea5e9;
+  --teal: #14b8a6;
+  --dark: #0f172a;
+  --mid: #334155;
+  --gray: #64748b;
+  --light: #f0f9ff;
+  --white: #ffffff;
+  --grad: linear-gradient(135deg, #0ea5e9, #14b8a6);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(14,165,233,0.1);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); text-decoration: none; }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue); }
+.nav-cta { background: var(--grad); color: #fff !important; padding: 10px 20px; border-radius: 8px; font-weight: 700 !important; font-size: 14px !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e2e8f0; padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+.mobile-menu a { color: var(--dark); text-decoration: none; font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+.mobile-menu .mob-cta { background: var(--grad); color: #fff; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; border: none; margin-top: 4px; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; padding: 120px 24px 80px;
+  background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -100px; left: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(20,184,166,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 760px; text-align: center; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.2);
+  color: var(--blue); font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 28px;
+}
+.hero-badge::before { content: '●'; font-size: 8px; color: var(--teal); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.1; color: var(--dark); margin-bottom: 24px;
+}
+.hero h1 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: clamp(16px, 2.5vw, 20px); color: var(--gray); line-height: 1.6; margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary { background: var(--grad); color: #fff; padding: 16px 32px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-block; box-shadow: 0 8px 24px rgba(14,165,233,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(14,165,233,0.4); }
+.btn-secondary { background: #fff; color: var(--dark); padding: 16px 32px; border-radius: 12px; font-weight: 600; font-size: 16px; text-decoration: none; display: inline-block; border: 2px solid #e2e8f0; transition: border-color 0.2s, transform 0.2s; }
+.btn-secondary:hover { border-color: var(--blue); transform: translateY(-2px); }
+.hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-stat .lbl { font-size: 13px; color: var(--gray); font-weight: 500; margin-top: 2px; }
+
+/* ── SECTIONS ── */
+section { padding: 80px 24px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 13px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 44px); color: var(--dark); margin-bottom: 16px; line-height: 1.2; }
+.section-sub { font-size: 17px; color: var(--gray); line-height: 1.6; max-width: 560px; }
+
+/* ── HOW IT WORKS ── */
+.how { background: var(--light); }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 56px; }
+.step { text-align: center; position: relative; }
+.step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--grad); color: #fff; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 20px rgba(14,165,233,0.25); }
+.step h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.step p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+.step-connector { position: absolute; top: 28px; right: -16px; color: var(--blue); font-size: 20px; opacity: 0.4; }
+
+/* ── FEATURES ── */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 56px; }
+.feature-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px; transition: transform 0.2s, box-shadow 0.2s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+.feature-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--light); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.feature-card h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.feature-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+/* ── PRICING ── */
+.pricing { background: var(--dark); }
+.pricing .section-title { color: #fff; }
+.pricing .section-sub { color: #94a3b8; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 56px; max-width: 700px; margin-left: auto; margin-right: auto; }
+.pricing-card { background: #1e293b; border: 1px solid #334155; border-radius: 20px; padding: 32px; position: relative; }
+.pricing-card.featured { background: var(--grad); border: none; }
+.pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #fbbf24; color: #92400e; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+.pricing-label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+.pricing-amount { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; color: #fff; line-height: 1; }
+.pricing-amount span { font-size: 20px; font-weight: 500; }
+.pricing-desc { font-size: 13px; color: rgba(255,255,255,0.6); margin: 8px 0 24px; }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.pricing-features li { font-size: 14px; color: rgba(255,255,255,0.85); display: flex; align-items: flex-start; gap: 10px; }
+.pricing-features li::before { content: '✓'; color: #4ade80; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* ── DEMO CTA ── */
+.demo-cta { background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%); text-align: center; }
+.demo-cta .section-title { color: #fff; }
+.demo-cta p { color: rgba(255,255,255,0.8); font-size: 18px; margin-bottom: 40px; }
+.btn-white { background: #fff; color: var(--blue); padding: 16px 40px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.demo-note { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 16px; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--light); }
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 56px; }
+.testimonial-card { background: #fff; border-radius: 16px; padding: 28px; border: 1px solid #e2e8f0; }
+.stars { color: #fbbf24; font-size: 16px; margin-bottom: 16px; }
+.testimonial-card p { font-size: 15px; color: var(--mid); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.author-name { font-weight: 700; font-size: 14px; color: var(--dark); }
+.author-role { font-size: 12px; color: var(--gray); }
+.coming-soon { text-align: center; padding: 40px; color: var(--gray); font-style: italic; font-size: 14px; grid-column: 1/-1; }
+
+/* ── FAQ ── */
+.faq-list { margin-top: 48px; max-width: 700px; }
+.faq-item { border-bottom: 1px solid #e2e8f0; }
+.faq-q { width: 100%; background: none; border: none; text-align: left; padding: 20px 0; font-size: 16px; font-weight: 600; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'DM Sans', sans-serif; }
+.faq-q .arrow { color: var(--blue); font-size: 18px; transition: transform 0.3s; flex-shrink: 0; }
+.faq-q.open .arrow { transform: rotate(180deg); }
+.faq-a { font-size: 15px; color: var(--gray); line-height: 1.7; padding-bottom: 20px; display: none; }
+.faq-a.open { display: block; }
+
+/* ── CONTACT ── */
+.contact { background: var(--dark); }
+.contact .section-title { color: #fff; }
+.contact .section-sub { color: #94a3b8; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 56px; align-items: start; }
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-item { display: flex; align-items: flex-start; gap: 16px; }
+.contact-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(14,165,233,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.contact-item h4 { font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 4px; }
+.contact-item p { font-size: 15px; color: #fff; font-weight: 500; }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-input { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 16px; font-size: 15px; color: #fff; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.2s; }
+.form-input::placeholder { color: #475569; }
+.form-input:focus { border-color: var(--blue); }
+textarea.form-input { resize: vertical; min-height: 120px; }
+.form-btn { background: var(--grad); color: #fff; border: none; border-radius: 10px; padding: 15px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
+.form-btn:hover { opacity: 0.9; }
+.form-success { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); border-radius: 10px; padding: 16px; color: #4ade80; font-size: 14px; text-align: center; display: none; }
+
+/* ── FOOTER ── */
+footer { background: #020617; padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; font-weight: 700; }
+.footer-logo span { color: var(--blue); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: #475569; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--blue); }
+.footer-copy { font-size: 12px; color: #334155; width: 100%; text-align: center; margin-top: 8px; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 60px 20px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .step-connector { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-stats { gap: 24px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 320px; text-align: center; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Denta<span>Book</span> AI</a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="https://dentabook-demo.vercel.app" target="_blank" class="nav-cta">View Demo →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how" onclick="closeMenu()">How It Works</a>
+  <a href="#features" onclick="closeMenu()">Features</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="https://dentabook-demo.vercel.app" target="_blank" class="mob-cta">View Live Demo →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Irish-built · AI-powered · Live in 24 hours</div>
+    <h1>Online Booking for<br/><span>Irish Dental Practices</span></h1>
+    <p class="hero-sub">Let patients book appointments 24/7 from your website. AI guides them to the right service. You see everything in a simple dashboard.</p>
+    <div class="hero-btns">
+      <a href="https://dentabook-demo.vercel.app" target="_blank" class="btn-primary">See Live Demo →</a>
+      <a href="#contact" class="btn-secondary">Get Started Today</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">24/7</div><div class="lbl">Patient Booking</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">Double Bookings</div></div>
+      <div class="hero-stat"><div class="num">24h</div><div class="lbl">Setup Time</div></div>
+      <div class="hero-stat"><div class="num">€99</div><div class="lbl">Per Month</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Simple Process</div>
+      <h2 class="section-title">Up and running in 24 hours</h2>
+      <p class="section-sub">No technical knowledge needed. We handle everything and hand you a live booking system.</p>
+    </div>
+    <div class="steps fade-up">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>You sign up</h3>
+        <p>Tell us your practice name, dentists and services. We set everything up for you.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We go live</h3>
+        <p>We deploy your booking system and send you a single line of code to add to your website.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Patients book</h3>
+        <p>Patients visit your website and book 24/7. You see all bookings instantly in your dashboard.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>You grow</h3>
+        <p>Fewer missed calls, no double bookings, and more time for your team to focus on patients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Everything You Need</div>
+      <h2 class="section-title">Built specifically for dental practices</h2>
+      <p class="section-sub">Not a generic booking tool. DentaBook AI is designed from the ground up for how dental practices actually work.</p>
+    </div>
+    <div class="features-grid fade-up">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Appointment Triage</h3>
+        <p>Patients describe their symptoms and our AI recommends the right appointment type — cleaning, emergency, filling or checkup.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Live Availability</h3>
+        <p>Real-time slot management. When a time is booked it's instantly blocked for all other patients. Zero double bookings — ever.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Dentist Dashboard</h3>
+        <p>See all your appointments in one place. Search by patient, filter by date, and cancel bookings with one click. Works on mobile too.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Easy Website Embed</h3>
+        <p>One line of code added to your existing website. Works with WordPress, Wix, Squarespace and any other platform.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile Friendly</h3>
+        <p>Patients can book from their phone in under 2 minutes. The dashboard works perfectly on your phone too.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>GDPR Compliant</h3>
+        <p>Your patient data is stored securely in an isolated database. We sign a Data Processing Agreement with every practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner fade-up">
+    <div class="section-label" style="color:#7dd3fc">Simple Pricing</div>
+    <h2 class="section-title">No hidden fees. Cancel anytime.</h2>
+    <p class="section-sub" style="margin-bottom:0">Everything you need to get your practice booking online — at a fraction of what the big systems charge.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-label">One-Time</div>
+        <div class="pricing-amount"><span>€</span>299</div>
+        <div class="pricing-desc">Setup fee — paid once</div>
+        <ul class="pricing-features">
+          <li>Full system setup & configuration</li>
+          <li>Your dentists & services added</li>
+          <li>Website embed code provided</li>
+          <li>15-minute onboarding call</li>
+          <li>Live within 24 hours</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-label">Monthly</div>
+        <div class="pricing-amount"><span>€</span>99</div>
+        <div class="pricing-desc">per practice, per month</div>
+        <ul class="pricing-features">
+          <li>Unlimited patient bookings</li>
+          <li>AI appointment triage</li>
+          <li>Live availability management</li>
+          <li>Dentist dashboard (mobile friendly)</li>
+          <li>Ongoing support & updates</li>
+          <li>Cancel anytime — no lock-in</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;color:#475569;font-size:14px;margin-top:32px">Compare to Coincidental (€160-300/month) or Dentally (€200-400/month) — DentaBook AI gives you everything you need at half the price.</p>
+  </div>
+</section>
+
+<!-- DEMO CTA -->
+<section class="demo-cta">
+  <div class="section-inner fade-up" style="text-align:center">
+    <div class="section-label" style="color:rgba(255,255,255,0.6)">See It For Yourself</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:16px">Try a live demo right now</h2>
+    <p>See exactly what your patients will experience when booking — and what you'll see in your dashboard.</p>
+    <a href="https://dentabook-demo.vercel.app" target="_blank" class="btn-white">Open Live Demo →</a>
+    <div class="demo-note">No sign up required · Dashboard password: demo123</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner fade-up">
+    <div class="section-label">Social Proof</div>
+    <h2 class="section-title">What practices are saying</h2>
+    <div class="testimonial-grid">
+      <div class="coming-soon">⭐ Testimonials coming soon — be our first client and get featured here!</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label">Common Questions</div>
+      <h2 class="section-title">Everything you need to know</h2>
+    </div>
+    <div class="faq-list fade-up">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does setup take? <span class="arrow">▾</span></button>
+        <div class="faq-a">We aim to have your system live within 24 hours of signing up. We handle all the technical setup — you just need to add one line of code to your website, which takes about 5 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Does it work with my existing website? <span class="arrow">▾</span></button>
+        <div class="faq-a">Yes! DentaBook AI works with any website — WordPress, Wix, Squarespace, or a custom-built site. We give you a single line of code to embed the booking widget anywhere on your site.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I customise the services and dentists shown? <span class="arrow">▾</span></button>
+        <div class="faq-a">Absolutely. Your system is fully customised with your exact services, appointment durations, and dentist names. When you join, we set everything up based on your specific practice.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is patient data secure and GDPR compliant? <span class="arrow">▾</span></button>
+        <div class="faq-a">Yes. Each practice has its own isolated database — your patient data is never mixed with another practice's. We sign a Data Processing Agreement with every client, and all data is stored securely in the EU.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I cancel at any time? <span class="arrow">▾</span></button>
+        <div class="faq-a">Yes — there's no long-term contract. You pay month to month and can cancel any time. If you cancel, we'll export your booking data so you keep full ownership of your patient records.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if I need help after setup? <span class="arrow">▾</span></button>
+        <div class="faq-a">We provide ongoing email support for all clients. As an Irish company, you'll always be speaking to Conor directly — not a foreign call centre.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="fade-up">
+      <div class="section-label" style="color:#7dd3fc">Get In Touch</div>
+      <h2 class="section-title">Ready to get started?</h2>
+      <p class="section-sub">Fill in the form and Conor will be in touch within 24 hours to set up DentaBook AI for your practice.</p>
+    </div>
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><h4>Email</h4><p>conorpyne@dentabook.ie</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div><h4>Demo</h4><p>dentabook-demo.vercel.app</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><h4>Location</h4><p>Ireland — serving practices nationwide</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⚡</div>
+          <div><h4>Response Time</h4><p>Within 24 hours</p></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <input class="form-input" type="text" placeholder="Your Name" id="cName"/>
+        <input class="form-input" type="text" placeholder="Practice Name" id="cPractice"/>
+        <input class="form-input" type="email" placeholder="Email Address" id="cEmail"/>
+        <input class="form-input" type="tel" placeholder="Phone Number" id="cPhone"/>
+        <textarea class="form-input" placeholder="Any questions or special requirements?" id="cMsg"></textarea>
+        <button class="form-btn" onclick="submitForm()">Send Message →</button>
+        <div class="form-success" id="formSuccess">✓ Message sent! Conor will be in touch within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Denta<span>Book</span> AI</div>
+    <div class="footer-links">
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="https://dentabook-demo.vercel.app" target="_blank">Live Demo</a>
+    </div>
+    <div class="footer-copy">© 2025 DentaBook AI · Conor Pyne trading as DentaBook AI · Ireland · conorpyne@dentabook.ie</div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').style.display = 'none';
+}
+
+// FAQ
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('open'));
+  if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+}
+
+// Contact form
+function submitForm() {
+  const name = document.getElementById('cName').value;
+  const email = document.getElementById('cEmail').value;
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  document.getElementById('formSuccess').style.display = 'block';
+  document.querySelector('.form-btn').style.display = 'none';
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
