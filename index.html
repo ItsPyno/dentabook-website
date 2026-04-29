@@ -506,13 +506,32 @@ function toggleFaq(btn) {
   if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
 }
 
-// Contact form
+// Contact form — sends via /api/contact (Resend)
 function submitForm() {
   const name = document.getElementById('cName').value;
+  const practice = document.getElementById('cPractice').value;
   const email = document.getElementById('cEmail').value;
+  const phone = document.getElementById('cPhone').value;
+  const message = document.getElementById('cMsg').value;
   if (!name || !email) { alert('Please enter your name and email.'); return; }
-  document.getElementById('formSuccess').style.display = 'block';
-  document.querySelector('.form-btn').style.display = 'none';
+  const btn = document.querySelector('.form-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, practice, email, phone, message })
+  })
+  .then(r => r.json())
+  .then(() => {
+    document.getElementById('formSuccess').style.display = 'block';
+    btn.style.display = 'none';
+  })
+  .catch(() => {
+    alert('Something went wrong. Please email conorpyne@dentabook.ie directly.');
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  });
 }
 
 // Scroll animations
