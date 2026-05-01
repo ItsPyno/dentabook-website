@@ -210,6 +210,9 @@ footer { background: #020617; padding: 40px 24px; }
 .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 </style>
+212  </style>
+213  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+214  </head>
 </head>
 <body>
 
@@ -241,7 +244,7 @@ footer { background: #020617; padding: 40px 24px; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Irish-built · AI-powered · Live in 24 hours</div>
+    <div class="hero-badge">Irish-built · AI-powered · Live within 1 week</div>
     <h1>Online Booking for<br/><span>Irish Dental Practices</span></h1>
     <p class="hero-sub">Let patients book appointments 24/7 from your website. AI guides them to the right service. You see everything in a simple dashboard.</p>
     <div class="hero-btns">
@@ -251,7 +254,7 @@ footer { background: #020617; padding: 40px 24px; }
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">24/7</div><div class="lbl">Patient Booking</div></div>
       <div class="hero-stat"><div class="num">0</div><div class="lbl">Double Bookings</div></div>
-      <div class="hero-stat"><div class="num">24h</div><div class="lbl">Setup Time</div></div>
+      <div class="hero-stat"><div class="num">1 wk</div><div class="lbl">Setup Time</div></div>
       <div class="hero-stat"><div class="num">€99</div><div class="lbl">Per Month</div></div>
     </div>
   </div>
@@ -262,7 +265,7 @@ footer { background: #020617; padding: 40px 24px; }
   <div class="section-inner">
     <div class="fade-up">
       <div class="section-label">Simple Process</div>
-      <h2 class="section-title">Up and running in 24 hours</h2>
+      <h2 class="section-title">Up and running within a week</h2>
       <p class="section-sub">No technical knowledge needed. We handle everything and hand you a live booking system.</p>
     </div>
     <div class="steps fade-up">
@@ -352,7 +355,7 @@ footer { background: #020617; padding: 40px 24px; }
           <li>Your dentists & services added</li>
           <li>Website embed code provided</li>
           <li>15-minute onboarding call</li>
-          <li>Live within 24 hours</li>
+          <li>Live within 1 week</li>
         </ul>
       </div>
       <div class="pricing-card featured">
@@ -406,7 +409,7 @@ footer { background: #020617; padding: 40px 24px; }
     <div class="faq-list fade-up">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">How long does setup take? <span class="arrow">▾</span></button>
-        <div class="faq-a">We aim to have your system live within 24 hours of signing up. We handle all the technical setup — you just need to add one line of code to your website, which takes about 5 minutes.</div>
+        <div class="faq-a">We aim to have your system live within one week of signing up. We handle all the technical setup — you just need to add one line of code to your website, which takes about 5 minutes.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Does it work with my existing website? <span class="arrow">▾</span></button>
@@ -483,7 +486,7 @@ footer { background: #020617; padding: 40px 24px; }
       <a href="#contact">Contact</a>
       <a href="https://dentabook-demo.vercel.app" target="_blank">Live Demo</a>
     </div>
-    <div class="footer-copy">© 2025 DentaBook AI · Conor Pyne trading as DentaBook AI · Ireland · conorpyne@dentabook.ie</div>
+    <div class="footer-copy">© 2026 DentaBook AI · Conor Pyne trading as DentaBook AI · Ireland · conorpyne@dentabook.ie</div>
   </div>
 </footer>
 
@@ -506,32 +509,34 @@ function toggleFaq(btn) {
   if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
 }
 
-// Contact form — sends via /api/contact (Resend)
+// Contact form
+emailjs.init('YOUR_PUBLIC_KEY');
+
 function submitForm() {
   const name = document.getElementById('cName').value;
   const practice = document.getElementById('cPractice').value;
   const email = document.getElementById('cEmail').value;
   const phone = document.getElementById('cPhone').value;
-  const message = document.getElementById('cMsg').value;
+  const msg = document.getElementById('cMsg').value;
   if (!name || !email) { alert('Please enter your name and email.'); return; }
   const btn = document.querySelector('.form-btn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  fetch('/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, practice, email, phone, message })
-  })
-  .then(r => r.json())
-  .then(() => {
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+    from_name: name,
+    practice_name: practice,
+    reply_to: email,
+    phone: phone,
+    message: msg
+  }).then(() => {
     document.getElementById('formSuccess').style.display = 'block';
     btn.style.display = 'none';
-  })
-  .catch(() => {
+  }).catch(() => {
     alert('Something went wrong. Please email conorpyne@dentabook.ie directly.');
     btn.textContent = 'Send Message →';
     btn.disabled = false;
   });
+}
 }
 
 // Scroll animations
