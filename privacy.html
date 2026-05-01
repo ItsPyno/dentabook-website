@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — DentaBook AI</title>
+<meta name="description" content="Privacy Policy for DentaBook AI — AI-powered online booking for Irish dental practices."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #0ea5e9;
+  --teal: #14b8a6;
+  --dark: #0f172a;
+  --mid: #334155;
+  --gray: #64748b;
+  --light: #f0f9ff;
+  --white: #ffffff;
+  --grad: linear-gradient(135deg, #0ea5e9, #14b8a6);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(14,165,233,0.1);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); text-decoration: none; }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue); }
+.nav-cta { background: var(--grad); color: #fff !important; padding: 10px 20px; border-radius: 8px; font-weight: 700 !important; font-size: 14px !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid #e2e8f0; padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+.mobile-menu a { color: var(--dark); text-decoration: none; font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+.mobile-menu .mob-cta { background: var(--grad); color: #fff; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; border: none; margin-top: 4px; }
+
+/* PAGE */
+.page-hero {
+  padding: 120px 24px 60px;
+  background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+  text-align: center;
+}
+.page-hero .section-label { font-size: 13px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); color: var(--dark); margin-bottom: 16px; }
+.page-hero p { font-size: 16px; color: var(--gray); }
+
+/* CONTENT */
+.policy-content { max-width: 760px; margin: 0 auto; padding: 60px 24px 100px; }
+.policy-section { margin-bottom: 48px; }
+.policy-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; color: var(--dark);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--blue);
+  display: inline-block;
+}
+.policy-section h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 20px 0 8px; }
+.policy-section p { font-size: 15px; color: var(--mid); line-height: 1.8; margin-bottom: 12px; }
+.policy-section ul { list-style: none; margin: 12px 0; }
+.policy-section ul li { font-size: 15px; color: var(--mid); line-height: 1.8; padding: 4px 0 4px 24px; position: relative; }
+.policy-section ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+.policy-section a { color: var(--blue); text-decoration: none; }
+.policy-section a:hover { text-decoration: underline; }
+
+.info-box {
+  background: var(--light);
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+.info-box p { font-size: 14px; color: var(--gray); line-height: 1.7; margin: 0; }
+.info-box strong { color: var(--dark); }
+
+.contact-box {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 48px;
+}
+.contact-box h3 { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+.contact-box p { color: #94a3b8; font-size: 14px; line-height: 1.8; margin: 0; }
+.contact-box a { color: var(--blue); text-decoration: none; }
+
+/* FOOTER */
+footer { background: #020617; padding: 40px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; font-weight: 700; }
+.footer-logo span { color: var(--blue); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: #475569; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--blue); }
+.footer-copy { font-size: 12px; color: #334155; width: 100%; text-align: center; margin-top: 8px; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Denta<span>Book</span> AI</a>
+  <div class="nav-links">
+    <a href="/#how">How It Works</a>
+    <a href="/#features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/#contact">Contact</a>
+    <a href="https://demo.dentabook.ie" target="_blank" class="nav-cta">View Demo →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#how" onclick="closeMenu()">How It Works</a>
+  <a href="/#features" onclick="closeMenu()">Features</a>
+  <a href="/#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="/#faq" onclick="closeMenu()">FAQ</a>
+  <a href="/#contact" onclick="closeMenu()">Contact</a>
+  <a href="https://demo.dentabook.ie" target="_blank" class="mob-cta">View Live Demo →</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="section-label">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p>Last updated: 1 May 2026</p>
+</div>
+
+<!-- CONTENT -->
+<div class="policy-content">
+
+  <div class="info-box">
+    <p>This Privacy Policy explains how <strong>DentaBook AI</strong>, operated by <strong>Conor Pyne trading as DentaBook AI</strong>, collects, uses and protects personal data in accordance with the <strong>General Data Protection Regulation (GDPR)</strong> and the Irish Data Protection Acts 1988–2018.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>1. Who We Are</h2>
+    <p><strong>Data Controller:</strong> Conor Pyne trading as DentaBook AI</p>
+    <p><strong>Email:</strong> <a href="mailto:conorpyne@dentabook.ie">conorpyne@dentabook.ie</a></p>
+    <p><strong>Website:</strong> <a href="https://dentabook.ie">dentabook.ie</a></p>
+    <p>As a provider of booking software to dental practices, DentaBook AI acts as a <strong>Data Processor</strong> in relation to patient data, while the dental practice acts as the <strong>Data Controller</strong>. We process patient data only on the instructions of the dental practice, as set out in our Data Processing Agreement.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>2. What Data We Collect</h2>
+
+    <h3>2.1 Website Visitors (dentabook.ie)</h3>
+    <p>When you contact us via our website contact form, we collect:</p>
+    <ul>
+      <li>Your name</li>
+      <li>Your email address</li>
+      <li>Your phone number</li>
+      <li>Your practice name (if applicable)</li>
+      <li>Any message you choose to send</li>
+    </ul>
+
+    <h3>2.2 Dental Practice Subscribers</h3>
+    <p>When a dental practice signs up to DentaBook AI, we collect:</p>
+    <ul>
+      <li>Practice name and address</li>
+      <li>Contact person name and email</li>
+      <li>Billing information (processed securely via Stripe)</li>
+      <li>Dentist names and specialties</li>
+      <li>Service types and appointment durations</li>
+    </ul>
+
+    <h3>2.3 Patient Booking Data</h3>
+    <p>When a patient books through a dental practice's DentaBook AI widget, we collect and process on behalf of the dental practice:</p>
+    <ul>
+      <li>Patient full name</li>
+      <li>Patient email address</li>
+      <li>Patient phone number</li>
+      <li>Appointment date, time and service type</li>
+      <li>Any notes provided by the patient</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h2>3. How We Use Personal Data</h2>
+
+    <h3>3.1 Website Enquiries</h3>
+    <p>We use contact form data to respond to your enquiry and set up your account if you proceed. <strong>Legal basis:</strong> Legitimate interests and contract performance.</p>
+
+    <h3>3.2 Dental Practice Accounts</h3>
+    <p>We use subscriber data to provide and maintain the service, process payments, and provide support. <strong>Legal basis:</strong> Contract performance and legitimate interests.</p>
+
+    <h3>3.3 Patient Booking Data</h3>
+    <p>We process patient data solely to provide the booking functionality on behalf of the dental practice. We do not use patient data for marketing or any other purpose. <strong>Legal basis:</strong> Contract performance (as Data Processor).</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>4. Data Storage & Security</h2>
+    <p>All data is stored securely using Supabase (PostgreSQL), hosted within the <strong>European Union</strong>. Each dental practice has its own isolated database — patient data from one practice is never accessible to another.</p>
+    <p>We implement the following security measures:</p>
+    <ul>
+      <li>Encrypted database connections (SSL/TLS)</li>
+      <li>Row-level security policies in our database</li>
+      <li>Access controls limiting data access to authorised personnel only</li>
+      <li>Secure API key management via environment variables</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h2>5. Data Retention</h2>
+    <ul>
+      <li>Website enquiry data: 2 years from the date of enquiry</li>
+      <li>Dental practice subscriber data: Duration of subscription plus 1 year</li>
+      <li>Patient booking data: As directed by the dental practice, subject to their own retention obligations</li>
+    </ul>
+    <p>When a dental practice cancels their subscription, we provide a full export of their patient booking data and securely delete it from our systems within 30 days.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>6. Sharing Personal Data</h2>
+    <p>We do not sell personal data. We share data only with trusted service providers necessary to operate our service:</p>
+    <ul>
+      <li>Supabase — database hosting (EU servers)</li>
+      <li>Vercel — application hosting</li>
+      <li>Resend — transactional email delivery</li>
+      <li>Stripe — payment processing (dental practice subscriptions only)</li>
+      <li>Anthropic — AI triage functionality (symptom descriptions only, no patient identifiers)</li>
+    </ul>
+    <p>All third-party processors are bound by appropriate data processing agreements and GDPR-compliant terms.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>7. Your Rights Under GDPR</h2>
+    <p>You have the following rights in relation to your personal data:</p>
+    <ul>
+      <li>Right of access — to receive a copy of the data we hold about you</li>
+      <li>Right to rectification — to have inaccurate data corrected</li>
+      <li>Right to erasure — to have your data deleted in certain circumstances</li>
+      <li>Right to restriction — to limit how we use your data</li>
+      <li>Right to data portability — to receive your data in a machine-readable format</li>
+      <li>Right to object — to object to certain types of processing</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at <a href="mailto:conorpyne@dentabook.ie">conorpyne@dentabook.ie</a>. We will respond within 30 days.</p>
+    <p>If you are a patient of a dental practice using DentaBook AI, please contact the dental practice directly as they are the Data Controller for your booking data.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>8. Cookies</h2>
+    <p>Our website uses only essential cookies necessary for the website to function. We do not use advertising or tracking cookies. The booking widget may use session cookies to maintain your booking progress — these are deleted when you close your browser.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>9. Data Processing Agreement</h2>
+    <p>Dental practices that subscribe to DentaBook AI enter into a Data Processing Agreement (DPA) with us, as required by Article 28 of the GDPR. This DPA sets out the terms under which we process patient data on behalf of the practice.</p>
+    <p>A copy of our standard Data Processing Agreement is available on request by emailing <a href="mailto:conorpyne@dentabook.ie">conorpyne@dentabook.ie</a>.</p>
+  </div>
+
+  <div class="policy-section">
+    <h2>10. Complaints</h2>
+    <p>If you have a concern about how we handle your personal data, please contact us first at <a href="mailto:conorpyne@dentabook.ie">conorpyne@dentabook.ie</a>.</p>
+    <p>You also have the right to lodge a complaint with the Data Protection Commission (DPC):</p>
+    <ul>
+      <li>Website: <a href="https://dataprotection.ie" target="_blank">dataprotection.ie</a></li>
+      <li>Phone: +353 57 868 4800</li>
+      <li>Address: 21 Fitzwilliam Square South, Dublin 2, D02 RD28</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be published on dentabook.ie with an updated "Last updated" date. We will notify dental practice subscribers of any significant changes by email.</p>
+  </div>
+
+  <div class="contact-box">
+    <h3>Contact Us</h3>
+    <p>
+      Conor Pyne — DentaBook AI<br/>
+      Email: <a href="mailto:conorpyne@dentabook.ie">conorpyne@dentabook.ie</a><br/>
+      Website: <a href="https://dentabook.ie">dentabook.ie</a>
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Denta<span>Book</span> AI</div>
+    <div class="footer-links">
+      <a href="/#how">How It Works</a>
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+    </div>
+    <div class="footer-copy">© 2026 DentaBook AI · Conor Pyne trading as DentaBook AI · Ireland · conorpyne@dentabook.ie</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').style.display = 'none';
+}
+</script>
+</body>
+</html>
